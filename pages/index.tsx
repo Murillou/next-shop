@@ -1,7 +1,7 @@
-import { styled } from '../styles';
+import { styled } from '../src/styles';
 
 const Button = styled('button', {
-  backgroundColor: '$pattern',
+  backgroundColor: '$green300',
   borderRadius: 4,
   border: 0,
   padding: '4px 8px',

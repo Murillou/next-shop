@@ -8,6 +8,7 @@ import axios from 'axios';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Stripe from 'stripe';
 
 interface ProductProps {
@@ -22,8 +23,12 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+  const [isCheckoutSessionCreate, setIsCheckoutSessionCreate] = useState(false);
+
   async function handleBuyProduct() {
     try {
+      setIsCheckoutSessionCreate(true);
+
       const response = await axios.post('/api/checkout', {
         priceId: product.defaultPriceId,
       });
@@ -32,6 +37,8 @@ export default function Product({ product }: ProductProps) {
 
       window.location.href = checkoutUrl;
     } catch (error) {
+      setIsCheckoutSessionCreate(false);
+
       alert('Falha ao realizar checkout');
     }
   }
@@ -53,7 +60,9 @@ export default function Product({ product }: ProductProps) {
 
         <p>{product.description}</p>
 
-        <button onClick={handleBuyProduct}>Comprar agora</button>
+        <button disabled={isCheckoutSessionCreate} onClick={handleBuyProduct}>
+          Comprar agora
+        </button>
       </ProductDetails>
     </ProductContainer>
   );

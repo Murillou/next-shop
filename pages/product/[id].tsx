@@ -4,8 +4,10 @@ import {
   ImageContainer,
   ProductContainer,
 } from '@/src/styles/pages/product';
-import { GetStaticProps } from 'next';
+import axios from 'axios';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Stripe from 'stripe';
 
 interface ProductProps {
@@ -15,10 +17,30 @@ interface ProductProps {
     imageUrl: string;
     price: string;
     description: string;
+    defaultPriceId: string;
   };
 }
 
 export default function Product({ product }: ProductProps) {
+  async function handleBuyProduct() {
+    try {
+      const response = await axios.post('/api/checkout', {
+        priceId: product.defaultPriceId,
+      });
+
+      const { checkouUrl } = response.data;
+
+      window.location.href = checkouUrl;
+    } catch (error) {
+      alert('Falha ao realizar checkout');
+    }
+  }
+
+  const { isFallback } = useRouter();
+  if (isFallback) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <ProductContainer>
       <ImageContainer>
@@ -27,15 +49,28 @@ export default function Product({ product }: ProductProps) {
 
       <ProductDetails>
         <h1>{product.name}</h1>
-        <span> {product.imageUrl}</span>
+        <span> {product.price}</span>
 
         <p>{product.description}</p>
 
-        <button>Comprar agora</button>
+        <button onClick={handleBuyProduct}>Comprar agora</button>
       </ProductDetails>
     </ProductContainer>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [
+      {
+        params: {
+          id: 'prod_Rh2yEUyOVs3aTL',
+        },
+      },
+    ],
+    fallback: true,
+  };
+};
 
 export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   params,
@@ -64,6 +99,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
           currency: 'BRL',
         }).format(price.unit_amount ? price.unit_amount / 100 : 0),
         description: product.description,
+        defaultPriceId: price.id,
       },
     },
     revalidate: 60 * 60 * 1, // 1 hour

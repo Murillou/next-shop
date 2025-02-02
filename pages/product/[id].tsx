@@ -28,9 +28,9 @@ export default function Product({ product }: ProductProps) {
         priceId: product.defaultPriceId,
       });
 
-      const { checkouUrl } = response.data;
+      const { checkoutUrl } = response.data;
 
-      window.location.href = checkouUrl;
+      window.location.href = checkoutUrl;
     } catch (error) {
       alert('Falha ao realizar checkout');
     }

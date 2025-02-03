@@ -73,7 +73,7 @@ export const Product = styled('div', {
       cursor: 'pointer',
 
       '&:hover': {
-        backgroundColor: '$gray900',
+        backgroundColor: '$green300',
       },
     },
   },

@@ -1,14 +1,20 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import { Overlay } from './style'
+import { Close, Content } from './style'
+import { X } from 'phosphor-react'
 
 export default function Cart(){
   return(
-    <Dialog.Root>
-      <Overlay />
 
       <Dialog.Portal>
+        <Close asChild>
+          <X size={32}/>
+      
+        </Close>
+        
+        <Content>
+          <h1>oi</h1>
+        </Content>
 
       </Dialog.Portal>
-    </Dialog.Root>
   )
 } 

@@ -1,3 +1,4 @@
+import * as Dialog from '@radix-ui/react-dialog'
 import { styled } from '..';
 
 export const Container = styled('div', {
@@ -18,12 +19,16 @@ export const Header = styled('header', {
   justifyContent: 'space-between',
   alignItems: 'center',
 
-  section: {
-    backgroundColor: '$gray800',
+})
+
+export const ButtonCart = styled(Dialog.Trigger, {
+
+  backgroundColor: '$gray800',
     padding: '0.75rem',
     borderRadius: 6,
+    border: 'none',
     width: 48,
     height: 48,
     cursor: 'pointer',
-  },
+
 })

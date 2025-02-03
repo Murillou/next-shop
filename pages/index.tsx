@@ -60,6 +60,7 @@ export default function Home({ products }: HomeProps) {
                 </footer>
               </Product>
             </Link>
+
           );
         })}
       </HomeContainer>

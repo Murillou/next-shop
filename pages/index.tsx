@@ -10,6 +10,7 @@ import 'keen-slider/keen-slider.min.css';
 import Stripe from 'stripe';
 import Link from 'next/link';
 import Head from 'next/head';
+import { Handbag } from 'phosphor-react';
 interface HomeProps {
   products: {
     id: string;
@@ -48,8 +49,14 @@ export default function Home({ products }: HomeProps) {
                 />
 
                 <footer>
-                  <strong>{product.name}</strong>
-                  <span>{product.price}</span>
+                  <div>
+                    <strong>{product.name}</strong>
+                    <span>{product.price}</span>
+                  </div>
+
+                  <section>
+                    <Handbag size={32} color="#fff" weight="bold" />
+                  </section>
                 </footer>
               </Product>
             </Link>

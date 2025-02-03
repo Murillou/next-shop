@@ -4,7 +4,7 @@ export const ProductContainer = styled('main', {
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
   alignItems: 'strech',
-  gap: '4rem',
+  gap: '4.5rem',
 
   maxWidth: 1180,
   margin: '0 auto',
@@ -30,6 +30,7 @@ export const ImageContainer = styled('div', {
 export const ProductDetails = styled('div', {
   display: 'flex',
   flexDirection: 'column',
+  maxWidth: '100%',
 
   h1: { fontSize: '$2xl', color: '$gray300' },
 
@@ -51,6 +52,7 @@ export const ProductDetails = styled('div', {
     marginTop: 'auto',
     backgroundColor: '$green500',
     border: 0,
+    borderRadius: 8,
     color: '$white',
     cursor: 'pointer',
     padding: '1.25rem',

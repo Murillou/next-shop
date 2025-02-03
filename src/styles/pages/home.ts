@@ -16,6 +16,8 @@ export const Product = styled('div', {
   cursor: 'pointer',
   position: 'relative',
   overflow: 'hidden',
+  maxWidth: 696,
+  width: '100%',
 
   display: 'flex',
   alignItems: 'center',
@@ -30,7 +32,7 @@ export const Product = styled('div', {
     bottom: '0.25rem',
     left: '0.25rem',
     right: '0.25rem',
-    padding: '2rem',
+    padding: '1.25rem',
 
     borderRadius: 6,
 
@@ -44,15 +46,35 @@ export const Product = styled('div', {
     transition: 'all 0.2s ease-in-out',
     opacity: 0,
 
-    strong: {
-      fontSize: '$lg',
-      color: '$gray100',
+    div: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '0.5rem',
+      padding: '0.3rem',
+
+      strong: {
+        fontSize: '$md',
+        color: '$gray100',
+      },
+
+      span: {
+        fontSize: '$xl',
+        fontWeight: 'bold',
+        color: '$green300',
+      },
     },
 
-    span: {
-      fontSize: '$xl',
-      fontWeight: 'bold',
-      color: '$green300',
+    section: {
+      width: 56,
+      height: 56,
+      backgroundColor: '$green500',
+      padding: '0.75rem',
+      borderRadius: 6,
+      cursor: 'pointer',
+
+      '&:hover': {
+        backgroundColor: '$gray900',
+      },
     },
   },
 

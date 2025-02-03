@@ -4,6 +4,7 @@ import {
   SuccessContainer,
 } from '@/src/styles/pages/success';
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Stripe from 'stripe';
@@ -18,19 +19,26 @@ interface SucessProps {
 
 export default function Success({ customerName, product }: SucessProps) {
   return (
-    <SuccessContainer>
-      <h1>Compra efetuada!</h1>
+    <>
+      <Head>
+        <title>Compra efetuada | Next Shop </title>
+        <meta name="robots" content="noindex" />
+      </Head>
 
-      <ImageSuccessContainer>
-        <Image src={product.imageUrl} width={120} height={110} alt={''} />
-      </ImageSuccessContainer>
+      <SuccessContainer>
+        <h1>Compra efetuada!</h1>
 
-      <p>
-        Uhuul <strong>{customerName}</strong>, sua{' '}
-        <strong>{product.name}</strong> já está a caminho da sua casa.
-      </p>
-      <Link href="/">Voltar ao catálogo</Link>
-    </SuccessContainer>
+        <ImageSuccessContainer>
+          <Image src={product.imageUrl} width={120} height={110} alt={''} />
+        </ImageSuccessContainer>
+
+        <p>
+          Uhuul <strong>{customerName}</strong>, sua{' '}
+          <strong>{product.name}</strong> já está a caminho da sua casa.
+        </p>
+        <Link href="/">Voltar ao catálogo</Link>
+      </SuccessContainer>
+    </>
   );
 }
 

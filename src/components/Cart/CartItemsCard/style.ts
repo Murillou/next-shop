@@ -17,9 +17,14 @@ export const CardInfoProduct = styled('div', {
   flexDirection: 'column',
   gap: '0.6rem',
 
-  span: {
+  p: {
     color: '$gray300',
     fontSize: '$md',
+  },
+
+  span: {
+    color: '$green300',
+    textAlign: 'center',
   },
 
   strong: {

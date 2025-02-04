@@ -13,8 +13,10 @@ export function CartItemCard({ product, removeFromCart }: CartItemCardProps) {
       <Image src={product.imageUrl} width={95} height={95} alt="" />
 
       <CardInfoProduct>
-        <span>{product.name}</span>
-        <strong>{product.price}</strong>
+        <p>{product.name}</p>
+        <strong>
+          {product.price} <span>x {product.quantity}</span>
+        </strong>
         <button onClick={() => removeFromCart(product.id)}>Remover</button>
       </CardInfoProduct>
     </CardContainer>

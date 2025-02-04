@@ -34,7 +34,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
         );
       }
 
-      return [...prevCart, { ...product, quantity: 1 }];
+      const price = parseFloat(
+        product.price.toString().replace('R$', '').replace(',', '.')
+      );
+
+      return [...prevCart, { ...product, price, quantity: 1 }];
     });
   }
 
@@ -50,10 +54,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   };
 
-  const totalPrice = cart.reduce(
-    (acc, product) => acc + product.price * product.quantity,
-    0
-  );
+  const totalPrice = cart.reduce((acc, product) => {
+    return acc + product.price * product.quantity;
+  }, 0);
 
   return (
     <CartContext.Provider

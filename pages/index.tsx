@@ -11,12 +11,15 @@ import Stripe from 'stripe';
 import Link from 'next/link';
 import Head from 'next/head';
 import { Handbag } from 'phosphor-react';
+import { useContext } from 'react';
+import { CartContext } from '@/src/context/CartContext';
 interface HomeProps {
   products: {
     id: string;
     name: string;
     imageUrl: string;
     price: string;
+    defaultPriceId: string;
   }[];
 }
 
@@ -26,6 +29,8 @@ export default function Home({ products }: HomeProps) {
       perView: 3,
     },
   });
+
+  const { addToCart } = useContext(CartContext);
   return (
     <>
       <Head>
@@ -55,7 +60,14 @@ export default function Home({ products }: HomeProps) {
                   </div>
 
                   <section>
-                    <Handbag size={32} color="#fff" weight="bold" />
+                    <button
+                      onClick={e => {
+                        e.preventDefault();
+                        addToCart({ ...product, quantity: 1 });
+                      }}
+                    >
+                      <Handbag size={32} color="#fff" weight="bold" />
+                    </button>
                   </section>
                 </footer>
               </Product>
@@ -83,6 +95,7 @@ export const getStaticProps: GetStaticProps = async () => {
         style: 'currency',
         currency: 'BRL',
       }).format(price.unit_amount ? price.unit_amount / 100 : 0),
+      defaultPriceId: price.id,
     };
   });
 

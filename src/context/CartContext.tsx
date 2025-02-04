@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from 'react';
 
-interface Product {
+export interface Product {
   id: string;
   name: string;
   imageUrl: string;
@@ -17,7 +17,7 @@ interface CartContextType {
   totalPrice: number;
 }
 
-const CartContext = createContext({} as CartContextType);
+export const CartContext = createContext({} as CartContextType);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<Product[]>([]);

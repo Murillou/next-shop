@@ -4,7 +4,7 @@ export interface Product {
   id: string;
   name: string;
   imageUrl: string;
-  price: string;
+  price: number;
   defaultPriceId: string;
   quantity: number;
 }
@@ -51,7 +51,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const totalPrice = cart.reduce(
-    (acc, product) => acc + parseFloat(product.price) * product.quantity,
+    (acc, product) => acc + product.price * product.quantity,
     0
   );
 

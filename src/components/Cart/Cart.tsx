@@ -14,7 +14,7 @@ const cartAnimation = {
 };
 
 export default function Cart() {
-  const { cart, removeFromCart } = useContext(CartContext);
+  const { cart, removeFromCart, totalPrice } = useContext(CartContext);
   console.log(cart);
   return (
     <Dialog.Portal>
@@ -51,12 +51,12 @@ export default function Cart() {
         <section>
           <div>
             <p>Quantidade</p>
-            <p>3 itens</p>
+            <p>{cart.length} itens</p>
           </div>
 
           <div>
             <strong>Valor total</strong>
-            <span>R$ 270.00</span>
+            <span>{totalPrice.toFixed(2)}</span>
           </div>
 
           <button>Finalizar compra</button>

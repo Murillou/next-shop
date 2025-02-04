@@ -5,7 +5,7 @@ import { useKeenSlider } from 'keen-slider/react';
 
 import { HomeContainer, Product } from '../src/styles/pages/home';
 import { stripe } from '@/src/lib/stripe';
-
+import { toast } from 'react-toastify';
 import 'keen-slider/keen-slider.min.css';
 import Stripe from 'stripe';
 import Link from 'next/link';
@@ -30,7 +30,19 @@ export default function Home({ products }: HomeProps) {
     },
   });
 
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, isSubmitting } = useContext(CartContext);
+  const notify = () =>
+    toast.success('Item adicionado ao carrinho!', {
+      position: 'top-right',
+      autoClose: 1700,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+
   return (
     <>
       <Head>
@@ -61,9 +73,11 @@ export default function Home({ products }: HomeProps) {
 
                   <section>
                     <button
+                      disabled={isSubmitting[product.id]}
                       onClick={e => {
                         e.preventDefault();
                         addToCart({ ...product, quantity: 1 });
+                        notify();
                       }}
                     >
                       <Handbag size={32} color="#fff" weight="bold" />

@@ -15,14 +15,32 @@ interface CartContextType {
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   totalPrice: number;
+  isSubmitting: { [key: string]: boolean };
 }
 
 export const CartContext = createContext({} as CartContextType);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<Product[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState<{ [key: string]: boolean }>(
+    {}
+  );
+
+  const handleButtonState = (productId: string, state: boolean) => {
+    setIsSubmitting(prev => ({ ...prev, [productId]: state }));
+
+    if (state) {
+      setTimeout(() => {
+        setIsSubmitting(prev => ({ ...prev, [productId]: false }));
+      }, 2000);
+    }
+  };
 
   function addToCart(product: Product) {
+    if (isSubmitting[product.id]) return;
+
+    handleButtonState(product.id, true);
+
     setCart(prevCart => {
       const existingProduct = prevCart.find(item => item.id === product.id);
 
@@ -38,7 +56,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
         product.price.toString().replace('R$', '').replace(',', '.')
       );
 
-      return [...prevCart, { ...product, price, quantity: 1 }];
+      const updateCart = [...prevCart, { ...product, price, quantity: 1 }];
+
+      setTimeout(() => {
+        console.log(`Reabilitando botão para o produto ${product.name}`);
+        setIsSubmitting(prev => ({ ...prev, [product.id]: false }));
+      }, 2000);
+
+      return updateCart;
     });
   }
 
@@ -60,7 +85,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, updateQuantity, totalPrice }}
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        totalPrice,
+        isSubmitting,
+      }}
     >
       {children}
     </CartContext.Provider>

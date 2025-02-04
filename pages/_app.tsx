@@ -7,6 +7,7 @@ import { Handbag } from 'phosphor-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import Cart from '../src/components/Cart/Cart';
 import { CartProvider } from '@/src/context/CartContext';
+import { ToastContainer } from 'react-toastify';
 
 globalStyles();
 export default function App({ Component, pageProps }: AppProps) {
@@ -26,6 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </Container>
 
         <Cart />
+        <ToastContainer />
       </Dialog.Root>
     </CartProvider>
   );

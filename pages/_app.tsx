@@ -4,9 +4,8 @@ import logoImg from '../src/assets/logo.svg';
 import { ButtonCart, Container, Header } from '../src/styles/pages/app';
 import Image from 'next/image';
 import { Handbag } from 'phosphor-react';
-import * as Dialog from '@radix-ui/react-dialog'
+import * as Dialog from '@radix-ui/react-dialog';
 import Cart from '../src/components/Cart/Cart';
-
 
 globalStyles();
 export default function App({ Component, pageProps }: AppProps) {
@@ -24,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </Container>
 
-    <Cart />
+      <Cart />
     </Dialog.Root>
   );
 }

@@ -64,12 +64,13 @@ export const Product = styled('div', {
       },
     },
 
-    section: {
+    button: {
       width: 56,
       height: 56,
       backgroundColor: '$green500',
       padding: '0.75rem',
       borderRadius: 6,
+      border: 'none',
       cursor: 'pointer',
 
       '&:hover': {

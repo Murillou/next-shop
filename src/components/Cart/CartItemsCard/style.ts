@@ -41,5 +41,6 @@ export const CardInfoProduct = styled('div', {
     paddingTop: '0.7rem',
     fontSize: '$md',
     fontWeight: 'bold',
+    cursor: 'pointer',
   },
 });

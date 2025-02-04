@@ -1,6 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { Close, Content, ProductBag } from './style';
-import { X } from 'phosphor-react';
+import { CartEmpty, Close, Content, ProductBag } from './style';
+import { SmileySad, X } from 'phosphor-react';
 import { motion } from 'framer-motion';
 import { useContext } from 'react';
 import { CartContext } from '@/src/context/CartContext';
@@ -15,7 +15,9 @@ const cartAnimation = {
 
 export default function Cart() {
   const { cart, removeFromCart, totalPrice } = useContext(CartContext);
-  console.log(cart);
+
+  const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <Dialog.Portal>
       <Content
@@ -33,7 +35,10 @@ export default function Cart() {
 
           <div>
             {cart.length === 0 ? (
-              <p>Seu carrinho está vázio :c</p>
+              <CartEmpty>
+                <h1>Uuuups, sua sacola está vazia.</h1>
+                <SmileySad size={200} />
+              </CartEmpty>
             ) : (
               <>
                 {cart.map(item => (
@@ -51,7 +56,7 @@ export default function Cart() {
         <section>
           <div>
             <p>Quantidade</p>
-            <p>{cart.length} itens</p>
+            <p>{totalQuantity} itens</p>
           </div>
 
           <div>

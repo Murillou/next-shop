@@ -78,3 +78,17 @@ export const ProductBag = styled('div', {
     color: '$gray100',
   },
 });
+
+export const CartEmpty = styled('div', {
+  color: '$green300',
+  fontSize: '2xl',
+  padding: '10rem 0',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '2rem',
+
+  h1: {
+    color: '$green300',
+  },
+});

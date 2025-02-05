@@ -27,16 +27,16 @@ export const Content = styled(Dialog.Content, {
 
       p: {
         color: '$gray300',
-        fontSize: '$md',
+        fontSize: '1rem',
       },
 
       strong: {
-        fontSize: '$lg',
+        fontSize: '1.125rem',
         color: '$gray100',
       },
 
       span: {
-        fontSize: '$xl',
+        fontSize: '1.25rem',
         color: '$gray100',
         fontWeight: 'bold',
       },
@@ -47,12 +47,11 @@ export const Content = styled(Dialog.Content, {
       border: 'none',
       borderRadius: 8,
       marginTop: '3.5rem',
-      padding: '1.25rem 2rem',
+      padding: '1rem 1.5rem',
       color: '#fff',
       cursor: 'pointer',
       transition: 'border 0.6s',
-      fontSize: '$lg',
-      fontWeight: 'bold',
+      fontSize: '1rem',
 
       '&:hover': {
         backgroundColor: '$green300',
@@ -60,8 +59,56 @@ export const Content = styled(Dialog.Content, {
     },
   },
 
+  '@media (min-width: 600px)': {
+    height: '100vh',
+    width: '30vw',
+
+    section: {
+      div: {
+        p: {
+          fontSize: '1.125rem',
+        },
+
+        strong: {
+          fontSize: '1.25rem',
+        },
+
+        span: {
+          fontSize: '1.375rem',
+        },
+      },
+
+      button: {
+        padding: '1.25rem 2rem',
+        fontSize: '1.125rem',
+      },
+    },
+  },
+
   '@media (min-width: 1232px)': {
     height: '100vh',
+    width: '20vw',
+
+    section: {
+      div: {
+        p: {
+          fontSize: '1.25rem',
+        },
+
+        strong: {
+          fontSize: '1.375rem',
+        },
+
+        span: {
+          fontSize: '1.5rem',
+        },
+      },
+
+      button: {
+        padding: '1.5rem 2.5rem',
+        fontSize: '1.25rem',
+      },
+    },
   },
 });
 
@@ -78,14 +125,14 @@ export const ProductBag = styled('div', {
   gap: '2rem',
 
   h1: {
-    fontSize: '$lg',
+    fontSize: '1.25rem',
     color: '$gray100',
   },
 });
 
 export const CartEmpty = styled('div', {
   color: '$green300',
-  fontSize: '2xl',
+  fontSize: '1.5rem',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -93,5 +140,9 @@ export const CartEmpty = styled('div', {
 
   h1: {
     color: '$green300',
+  },
+
+  '@media (min-width: 1300px)': {
+    paddingTop: '5rem',
   },
 });

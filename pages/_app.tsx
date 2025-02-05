@@ -10,6 +10,8 @@ import { CartContext, CartProvider } from '@/src/context/CartContext';
 import { ToastContainer } from 'react-toastify';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Head from 'next/head';
 
 globalStyles();
 
@@ -24,11 +26,15 @@ function MainApp({ Component, pageProps }: AppProps) {
   return (
     <Dialog.Root>
       <Container>
+        <Head>
+          <link rel="icon" href="/favicon.png" />
+        </Head>
         <Header
           style={{ justifyContent: isSuccessPage ? 'center' : 'space-between' }}
         >
-          <Image src={logoImg} alt="Logo" />
-
+          <Link href="/">
+            <Image src={logoImg} alt="Logo" />
+          </Link>
           {!isSuccessPage && (
             <ButtonCart>
               <span>{totalQuantity}</span>

@@ -9,31 +9,38 @@ import Cart from '../src/components/Cart/Cart';
 import { CartContext, CartProvider } from '@/src/context/CartContext';
 import { ToastContainer } from 'react-toastify';
 import { useContext } from 'react';
+import { useRouter } from 'next/router';
 
 globalStyles();
 
 function MainApp({ Component, pageProps }: AppProps) {
   const { cart } = useContext(CartContext);
+  const router = useRouter();
 
   const totalQuantity = Array.isArray(cart)
     ? cart.reduce((acc, item) => acc + item.quantity, 0)
     : 0;
-
+  const isSuccessPage = router.pathname === '/success';
   return (
     <Dialog.Root>
       <Container>
-        <Header>
-          <Image src={logoImg} alt="" />
-          <ButtonCart>
-            <span>{totalQuantity}</span>
-            <Handbag size={24} color="#8d8d99" />
-          </ButtonCart>
+        <Header
+          style={{ justifyContent: isSuccessPage ? 'center' : 'space-between' }}
+        >
+          <Image src={logoImg} alt="Logo" />
+
+          {!isSuccessPage && (
+            <ButtonCart>
+              <span>{totalQuantity}</span>
+              <Handbag size={24} color="#8d8d99" />
+            </ButtonCart>
+          )}
         </Header>
 
         <Component {...pageProps} />
       </Container>
 
-      <Cart />
+      {!isSuccessPage && <Cart />}
       <ToastContainer />
     </Dialog.Root>
   );

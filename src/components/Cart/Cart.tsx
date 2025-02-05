@@ -18,19 +18,31 @@ const cartAnimation = {
 export default function Cart() {
   const { cart, removeFromCart, totalPrice } = useContext(CartContext);
   const [isCheckoutSessionCreate, setIsCheckoutSessionCreate] = useState(false);
-  const notify = () =>
-    toast.info('O seu carrinho está vázio.', {
-      position: 'top-right',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'colored',
-    });
+  const [isNotifying, setIsNotifying] = useState(false);
+
+  function notifyEmptyCart() {
+    if (!isNotifying) {
+      setIsNotifying(true);
+      toast.info('O seu carrinho está vazio.', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+        onClose: () => setIsNotifying(false),
+      });
+    }
+  }
 
   async function handleBuyProduct() {
+    if (cart.length === 0) {
+      notifyEmptyCart();
+      return;
+    }
+
     try {
       setIsCheckoutSessionCreate(true);
 
@@ -45,9 +57,9 @@ export default function Cart() {
 
       window.location.href = checkoutUrl;
     } catch (error) {
+      toast.error('Erro ao processar a compra. Tente novamente mais tarde.');
+    } finally {
       setIsCheckoutSessionCreate(false);
-
-      notify();
     }
   }
 

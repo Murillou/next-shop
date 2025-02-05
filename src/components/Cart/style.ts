@@ -5,9 +5,9 @@ export const Content = styled(Dialog.Content, {
   position: 'fixed',
   top: 0,
   right: 0,
-  height: '100vh',
-  width: '100%',
-  maxWidth: 480,
+  height: '110vh',
+  width: '25vw',
+  minWidth: '250px',
   backgroundColor: '$gray800',
   border: 'none',
   padding: '4rem 3rem 3rem 3rem',
@@ -59,6 +59,10 @@ export const Content = styled(Dialog.Content, {
       },
     },
   },
+
+  '@media (min-width: 1232px)': {
+    height: '100vh',
+  },
 });
 
 export const Close = styled(Dialog.Close, {
@@ -82,7 +86,6 @@ export const ProductBag = styled('div', {
 export const CartEmpty = styled('div', {
   color: '$green300',
   fontSize: '2xl',
-  padding: '10rem 0',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',

@@ -37,8 +37,20 @@ export const notify = () =>
 export default function Home({ products }: HomeProps) {
   const [sliderRef] = useKeenSlider({
     slides: {
-      perView: 3,
+      perView: 1,
+      spacing: 46,
     },
+    breakpoints: {
+      '(min-width: 800px)': {
+        slides: {
+          perView: 2,
+          spacing: 46,
+        },
+      },
+    },
+    rubberband: false,
+    mode: 'free',
+    loop: true,
   });
 
   const { addToCart, isSubmitting } = useContext(CartContext);

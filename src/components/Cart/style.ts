@@ -5,7 +5,7 @@ export const Content = styled(Dialog.Content, {
   position: 'fixed',
   top: 0,
   right: 0,
-  height: '110vh',
+  height: '100%',
   width: '25vw',
   minWidth: '250px',
   backgroundColor: '$gray800',

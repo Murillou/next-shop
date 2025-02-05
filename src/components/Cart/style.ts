@@ -6,8 +6,8 @@ export const Content = styled(Dialog.Content, {
   top: 0,
   right: 0,
   height: '100%',
-  width: '25vw',
-  minWidth: '250px',
+  width: '50vw',
+  minWidth: '350px',
   backgroundColor: '$gray800',
   border: 'none',
   padding: '4rem 3rem 3rem 3rem',
@@ -61,7 +61,7 @@ export const Content = styled(Dialog.Content, {
 
   '@media (min-width: 600px)': {
     height: '100vh',
-    width: '30vw',
+    width: '50vw',
 
     section: {
       div: {
@@ -87,7 +87,7 @@ export const Content = styled(Dialog.Content, {
 
   '@media (min-width: 1232px)': {
     height: '100vh',
-    width: '20vw',
+    width: '25vw',
 
     section: {
       div: {

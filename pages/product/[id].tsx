@@ -24,26 +24,6 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-  const [isCheckoutSessionCreate, setIsCheckoutSessionCreate] = useState(false);
-
-  async function handleBuyProduct() {
-    try {
-      setIsCheckoutSessionCreate(true);
-
-      const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId,
-      });
-
-      const { checkoutUrl } = response.data;
-
-      window.location.href = checkoutUrl;
-    } catch (error) {
-      setIsCheckoutSessionCreate(false);
-
-      alert('Falha ao realizar checkout');
-    }
-  }
-
   const { isFallback } = useRouter();
   if (isFallback) {
     return <h1>Loading...</h1>;
@@ -66,9 +46,7 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button disabled={isCheckoutSessionCreate} onClick={handleBuyProduct}>
-            Colocar na sacola
-          </button>
+          <button>Colocar na sacola</button>
         </ProductDetails>
       </ProductContainer>
     </>

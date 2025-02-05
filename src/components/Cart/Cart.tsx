@@ -2,10 +2,11 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { CartEmpty, Close, Content, ProductBag } from './style';
 import { SmileySad, X } from 'phosphor-react';
 import { motion } from 'framer-motion';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CartContext } from '@/src/context/CartContext';
 import Image from 'next/image';
 import { CartItemCard } from './CartItemsCard/CartItemsCard';
+import axios from 'axios';
 
 const cartAnimation = {
   hidden: { x: '100%', opacity: 0 },
@@ -15,6 +16,28 @@ const cartAnimation = {
 
 export default function Cart() {
   const { cart, removeFromCart, totalPrice } = useContext(CartContext);
+  const [isCheckoutSessionCreate, setIsCheckoutSessionCreate] = useState(false);
+
+  async function handleBuyProduct() {
+    try {
+      setIsCheckoutSessionCreate(true);
+
+      const response = await axios.post('/api/checkout', {
+        products: cart.map(product => ({
+          priceId: product.defaultPriceId,
+          quantity: product.quantity,
+        })),
+      });
+
+      const { checkoutUrl } = response.data;
+
+      window.location.href = checkoutUrl;
+    } catch (error) {
+      setIsCheckoutSessionCreate(false);
+
+      alert('Falha ao realizar checkout');
+    }
+  }
 
   const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -64,7 +87,9 @@ export default function Cart() {
             <span>{totalPrice.toFixed(2)}</span>
           </div>
 
-          <button>Finalizar compra</button>
+          <button onClick={handleBuyProduct} disabled={cart.length === 0}>
+            Finalizar compra
+          </button>
         </section>
       </Content>
     </Dialog.Portal>

@@ -1,3 +1,4 @@
+import { CartContext } from '@/src/context/CartContext';
 import { stripe } from '@/src/lib/stripe';
 import {
   ProductDetails,
@@ -9,21 +10,24 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Stripe from 'stripe';
+import { notify } from '..';
 
 interface ProductProps {
   product: {
     id: string;
     name: string;
     imageUrl: string;
-    price: string;
+    price: number;
     description: string;
     defaultPriceId: string;
+    quantity: number;
   };
 }
 
 export default function Product({ product }: ProductProps) {
+  const { addToCart, isSubmitting } = useContext(CartContext);
   const { isFallback } = useRouter();
   if (isFallback) {
     return <h1>Loading...</h1>;
@@ -46,7 +50,17 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button>Colocar na sacola</button>
+          <button
+            disabled={isSubmitting[product.id]}
+            onClick={e => {
+              e.preventDefault();
+              addToCart({ ...product, quantity: 1 });
+              notify();
+            }}
+          >
+            {' '}
+            Colocar na sacola
+          </button>
         </ProductDetails>
       </ProductContainer>
     </>

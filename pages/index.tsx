@@ -22,6 +22,17 @@ interface HomeProps {
     defaultPriceId: string;
   }[];
 }
+export const notify = () =>
+  toast.success('Item adicionado ao carrinho!', {
+    position: 'top-right',
+    autoClose: 1580,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    theme: 'colored',
+  });
 
 export default function Home({ products }: HomeProps) {
   const [sliderRef] = useKeenSlider({
@@ -31,17 +42,6 @@ export default function Home({ products }: HomeProps) {
   });
 
   const { addToCart, isSubmitting } = useContext(CartContext);
-  const notify = () =>
-    toast.success('Item adicionado ao carrinho!', {
-      position: 'top-right',
-      autoClose: 1700,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: 'colored',
-    });
 
   return (
     <>

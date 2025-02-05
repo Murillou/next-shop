@@ -60,7 +60,7 @@ export const ProductDetails = styled('div', {
     fontSize: '$md',
 
     '&:disabled': {
-      cursor: 'notAllowed',
+      cursor: 'not-allowed',
       opacity: 0.6,
     },
 

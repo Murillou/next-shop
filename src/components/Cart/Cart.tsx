@@ -21,6 +21,7 @@ export default function Cart() {
   async function handleBuyProduct() {
     try {
       setIsCheckoutSessionCreate(true);
+      console.log('Produtos no carrinho:', cart);
 
       const response = await axios.post('/api/checkout', {
         products: cart.map(product => ({

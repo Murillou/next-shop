@@ -7,6 +7,7 @@ import { CartContext } from '@/src/context/CartContext';
 import Image from 'next/image';
 import { CartItemCard } from './CartItemsCard/CartItemsCard';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const cartAnimation = {
   hidden: { x: '100%', opacity: 0 },
@@ -17,6 +18,17 @@ const cartAnimation = {
 export default function Cart() {
   const { cart, removeFromCart, totalPrice } = useContext(CartContext);
   const [isCheckoutSessionCreate, setIsCheckoutSessionCreate] = useState(false);
+  const notify = () =>
+    toast.info('O seu carrinho está vázio.', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
 
   async function handleBuyProduct() {
     try {
@@ -35,7 +47,7 @@ export default function Cart() {
     } catch (error) {
       setIsCheckoutSessionCreate(false);
 
-      alert('Falha ao realizar checkout');
+      notify();
     }
   }
 
@@ -87,9 +99,7 @@ export default function Cart() {
             <span>{totalPrice.toFixed(2)}</span>
           </div>
 
-          <button onClick={handleBuyProduct} disabled={cart.length === 0}>
-            Finalizar compra
-          </button>
+          <button onClick={handleBuyProduct}>Finalizar compra</button>
         </section>
       </Content>
     </Dialog.Portal>

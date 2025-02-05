@@ -28,4 +28,16 @@ export const ButtonCart = styled(Dialog.Trigger, {
   width: 48,
   height: 48,
   cursor: 'pointer',
+  position: 'relative',
+
+  span: {
+    color: '#fff',
+    backgroundColor: '$green300',
+    borderRadius: '100%',
+    padding: '0.2rem 0.5rem',
+    position: 'absolute',
+    top: '-0.2rem',
+    right: '-0.65rem',
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.07)',
+  },
 });

@@ -10,9 +10,11 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Stripe from 'stripe';
 import { notify } from '..';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 interface ProductProps {
   product: {
@@ -29,8 +31,65 @@ interface ProductProps {
 export default function Product({ product }: ProductProps) {
   const { addToCart, isSubmitting } = useContext(CartContext);
   const { isFallback } = useRouter();
-  if (isFallback) {
-    return <h1>Loading...</h1>;
+  const [isLoading, setIsLoading] = useState(true);
+  const [productData, setProductData] = useState<
+    ProductProps['product'] | null
+  >(null);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      setTimeout(() => {
+        setProductData(product);
+        setIsLoading(false);
+      }, 1000);
+    } else {
+      setProductData(product);
+      setIsLoading(false);
+    }
+  }, [product]);
+
+  if (isFallback || isLoading) {
+    return (
+      <ProductContainer>
+        <Skeleton
+          width="100%"
+          height={656}
+          baseColor="#202020"
+          highlightColor="#444"
+        />
+
+        <ProductDetails>
+          <Skeleton
+            width={500}
+            height={32}
+            baseColor="#202020"
+            highlightColor="#444"
+            style={{ marginTop: '-1rem' }}
+          />
+          <Skeleton
+            width={150}
+            height={35}
+            baseColor="#202020"
+            highlightColor="#444"
+            style={{ marginTop: '-1.5rem' }}
+          />
+          <Skeleton
+            width={550}
+            height={180}
+            baseColor="#202020"
+            highlightColor="#444"
+            style={{ marginTop: '-1.5rem' }}
+          />
+          <Skeleton
+            width={550}
+            height={48}
+            baseColor="#202020"
+            highlightColor="#444"
+            style={{ marginTop: '-1.5rem' }}
+          />
+        </ProductDetails>
+      </ProductContainer>
+    );
   }
 
   return (

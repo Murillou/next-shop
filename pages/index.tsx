@@ -1,3 +1,6 @@
+import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton from 'react-loading-skeleton';
+
 import { GetStaticProps } from 'next';
 import Image from 'next/image';
 
@@ -11,8 +14,9 @@ import Stripe from 'stripe';
 import Link from 'next/link';
 import Head from 'next/head';
 import { Handbag } from 'phosphor-react';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '@/src/context/CartContext';
+import { useRouter } from 'next/router';
 interface HomeProps {
   products: {
     id: string;
@@ -35,6 +39,9 @@ export const notify = () =>
   });
 
 export default function Home({ products }: HomeProps) {
+  const { addToCart, isSubmitting } = useContext(CartContext);
+  const { isFallback } = useRouter();
+
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 1,
@@ -52,8 +59,23 @@ export default function Home({ products }: HomeProps) {
     mode: 'free',
     loop: true,
   });
-
-  const { addToCart, isSubmitting } = useContext(CartContext);
+  if (isFallback) {
+    const skeletons = new Array(2).fill(0);
+    return (
+      <HomeContainer>
+        {skeletons.map((_, index) => (
+          <Skeleton
+            key={index}
+            width={696}
+            height={656}
+            baseColor="#202020"
+            highlightColor="#444"
+            style={{ marginRight: '3.3rem' }}
+          />
+        ))}
+      </HomeContainer>
+    );
+  }
 
   return (
     <>

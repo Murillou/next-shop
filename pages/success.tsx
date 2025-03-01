@@ -1,4 +1,3 @@
-import { CartContext } from '@/src/context/CartContext';
 import { stripe } from '@/src/lib/stripe';
 import {
   ImageSuccessContainer,
@@ -8,7 +7,6 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useContext } from 'react';
 import Stripe from 'stripe';
 
 interface SucessProps {

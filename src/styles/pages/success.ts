@@ -4,34 +4,51 @@ export const SuccessContainer = styled('main', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center',
-  margin: '0 auto',
+  marginTop: '5rem',
   height: 656,
 
   h1: {
-    fontSize: '$2xl',
+    fontSize: '20px',
     color: '$gray100',
   },
 
   p: {
-    fontSize: '$lg',
+    fontSize: '$sm',
     color: '$gray300',
     maxWidth: 560,
     textAlign: 'center',
-    marginTop: '2rem',
+    marginTop: '1rem',
     lineHeight: 1.4,
   },
 
   a: {
     display: 'block',
-    marginTop: '5rem',
     fontSize: '$lg',
+    marginTop: '1rem',
     color: '$green500',
     textDecoration: 'none',
     fontWeight: 'bold',
 
     '&:hover': {
       color: '$green300',
+    },
+  },
+
+  '@media(min-width: 768px)': {
+    justifyContent: 'center',
+    margin: '0 auto',
+
+    h1: {
+      fontSize: '$2xl',
+    },
+
+    p: {
+      fontSize: '$lg',
+      marginTop: '2rem',
+    },
+
+    a: {
+      marginTop: '5rem',
     },
   },
 });
@@ -41,7 +58,6 @@ export const ImageSuccessContainer = styled('div', {
   maxWidth: 130,
   height: 145,
   padding: '0.25rem',
-  marginTop: '4rem',
 
   display: 'flex',
   flexDirection: 'row',
@@ -52,7 +68,6 @@ export const ImageSuccessContainer = styled('div', {
   img: {
     background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
     borderRadius: '100%',
-    marginLeft: '-1.5rem',
     boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.5)',
   },
 });

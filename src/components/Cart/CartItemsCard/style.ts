@@ -28,7 +28,7 @@ export const CardInfoProduct = styled('div', {
 
   p: {
     color: '$gray300',
-    fontSize: '$sm',
+    fontSize: '12px',
   },
 
   span: {

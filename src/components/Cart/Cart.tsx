@@ -83,7 +83,7 @@ export default function Cart() {
           <div>
             {cart.length === 0 ? (
               <CartEmpty>
-                <h1>Uuuups, sua sacola está vazia.</h1>
+                <h2>Uuuups, sua sacola está vazia.</h2>
                 <SmileySad size={200} />
               </CartEmpty>
             ) : (

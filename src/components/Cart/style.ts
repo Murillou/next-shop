@@ -125,8 +125,22 @@ export const ProductBag = styled('div', {
   gap: '2rem',
 
   h1: {
-    fontSize: '1.25rem',
-    color: '$gray100',
+    fontSize: '16px',
+    color: '$gray300',
+  },
+
+  h2: {
+    fontSize: '16px',
+  },
+
+  '@media (min-width: 768px)': {
+    h1: {
+      fontSize: '$md',
+    },
+
+    h2: {
+      fontSize: '$md',
+    },
   },
 });
 

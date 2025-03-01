@@ -12,17 +12,21 @@ import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 globalStyles();
 
 function MainApp({ Component, pageProps }: AppProps) {
   const { cart } = useContext(CartContext);
   const router = useRouter();
+  const { isFallback } = useRouter();
 
   const totalQuantity = Array.isArray(cart)
     ? cart.reduce((acc, item) => acc + item.quantity, 0)
     : 0;
   const isSuccessPage = router.pathname === '/success';
+
   return (
     <Dialog.Root>
       <Container>
@@ -33,14 +37,31 @@ function MainApp({ Component, pageProps }: AppProps) {
           style={{ justifyContent: isSuccessPage ? 'center' : 'space-between' }}
         >
           <Link href="/">
-            <Image src={logoImg} alt="Logo" />
+            {isFallback ? (
+              <Skeleton
+                width={'7rem'}
+                height={50}
+                baseColor="#202020"
+                highlightColor="#444"
+              />
+            ) : (
+              <Image src={logoImg} alt="Logo" />
+            )}
           </Link>
-          {!isSuccessPage && (
-            <ButtonCart>
-              <span>{totalQuantity}</span>
-              <Handbag size={24} color="#8d8d99" />
-            </ButtonCart>
-          )}
+          {!isSuccessPage &&
+            (isFallback ? (
+              <Skeleton
+                width={48}
+                height={48}
+                baseColor="#202020"
+                highlightColor="#444"
+              />
+            ) : (
+              <ButtonCart>
+                <span>{totalQuantity}</span>
+                <Handbag size={24} color="#8d8d99" />{' '}
+              </ButtonCart>
+            ))}
         </Header>
 
         <Component {...pageProps} />
